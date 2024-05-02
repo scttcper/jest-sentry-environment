@@ -3,7 +3,7 @@ function isNotTransaction(span) {
 }
 
 function createEnvironment({ baseEnvironment } = {}) {
-  const BaseEnvironment = baseEnvironment || require("jest-environment-jsdom");
+  const BaseEnvironment = baseEnvironment?.TestEnvironment || require("jest-environment-jsdom").TestEnvironment;
 
   return class SentryEnvironment extends BaseEnvironment {
     constructor(...args) {
@@ -23,7 +23,11 @@ function createEnvironment({ baseEnvironment } = {}) {
       }
 
       const Sentry = require("@sentry/node");
-      require("@sentry/tracing");
+      try {
+        require("@sentry/tracing");
+      } catch (e) {
+        // ignore if not installed
+      }
 
       const { init } = config.testEnvironmentOptions.sentryConfig;
 
