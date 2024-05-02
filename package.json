@@ -26,8 +26,13 @@
     "prettier": "^2.3.2"
   },
   "peerDependencies": {
-    "@sentry/node": ">=6",
-    "@sentry/tracing": ">=6",
-    "jest": ">=27"
+    "@sentry/node": ">=7",
+    "@sentry/tracing": ">=7",
+    "jest": ">=29"
+  },
+  "peerDependenciesMeta": {
+    "@sentry/tracing": {
+      "optional": true
+    }
   }
 }
